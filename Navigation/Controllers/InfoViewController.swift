@@ -9,14 +9,7 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.4862745098, green: 0.4117647059, blue: 0.5019607843, alpha: 1)
-        addViews()
-        layout()
-    }
-
-    //MARK: - Add AlertButton
+    //MARK: - Add Post Button
     private lazy var postButton: CradientButton = {
         var button = CradientButton(frame: CGRectMake(0, 0, 200, 40))
         button.setTitle("Go to alert", for: .normal)
@@ -24,17 +17,15 @@ class InfoViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         button.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         button.layer.cornerRadius = 16
-
         button.layer.shadowColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1).cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSizeMake(0.0, 5.0)
-
         button.addTarget(self, action: #selector(actionPostButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
-    //MARK: - Action AlertButton
+    //MARK: - Action Post Button
     @objc private func actionPostButton() {
         let alertController = UIAlertController(title: "Уже уходите?", message: "Вы точно хотите выйти?", preferredStyle: .alert)
 
@@ -53,13 +44,21 @@ class InfoViewController: UIViewController {
         }
     }
 
-    //MARK: - Add Views
-    private func addViews() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.4862745098, green: 0.4117647059, blue: 0.5019607843, alpha: 1)
+        setupViews()
+        setupConstraints()
+    }
+
+    //MARK: - Setup Views
+    private func setupViews() {
         view.addSubview(postButton)
     }
 
-    //MARK: - Add Constraint
-    private func layout() {
+    //MARK: - Setup Constraint
+    private func setupConstraints() {
+
         NSLayoutConstraint.activate([
 
             postButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

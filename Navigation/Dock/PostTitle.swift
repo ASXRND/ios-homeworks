@@ -13,4 +13,3 @@ struct Post {
     let text: String
 }
 
-

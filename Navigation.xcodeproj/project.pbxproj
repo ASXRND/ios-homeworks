@@ -19,6 +19,7 @@
 		1E179070298C5EED00823C2B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17906F298C5EED00823C2B /* UIColorExtension.swift */; };
 		1E179072298D177C00823C2B /* CradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E179071298D177C00823C2B /* CradientButton.swift */; };
 		1E179075298D26DB00823C2B /* PostTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E179074298D26DB00823C2B /* PostTitle.swift */; };
+		1EDE2E602993F39A00F0FE1A /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE2E5F2993F39A00F0FE1A /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		1E17906F298C5EED00823C2B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		1E179071298D177C00823C2B /* CradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CradientButton.swift; sourceTree = "<group>"; };
 		1E179074298D26DB00823C2B /* PostTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitle.swift; sourceTree = "<group>"; };
+		1EDE2E5F2993F39A00F0FE1A /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				1E179073298D26BF00823C2B /* Dock */,
 				1E17906E298C5ECD00823C2B /* Extension */,
+				1EDE2E5D2993F31200F0FE1A /* Profile */,
 				1E179062298C1EF100823C2B /* Controllers */,
 				1E17905F298C1DC800823C2B /* Resources */,
 				1E179061298C1E0A00823C2B /* Applicstion */,
@@ -103,7 +106,6 @@
 				1E17904F298C1DB800823C2B /* PostViewController.swift */,
 				1E179066298C284800823C2B /* MainTabBarViewController.swift */,
 				1E17906A298C363E00823C2B /* FeedViewController.swift */,
-				1E17906C298C365C00823C2B /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -123,6 +125,23 @@
 				1E179074298D26DB00823C2B /* PostTitle.swift */,
 			);
 			path = Dock;
+			sourceTree = "<group>";
+		};
+		1EDE2E5D2993F31200F0FE1A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1E17906C298C365C00823C2B /* ProfileViewController.swift */,
+				1EDE2E5E2993F34300F0FE1A /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		1EDE2E5E2993F34300F0FE1A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1EDE2E5F2993F39A00F0FE1A /* ProfileHeaderView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +216,7 @@
 			files = (
 				1E179075298D26DB00823C2B /* PostTitle.swift in Sources */,
 				1E179050298C1DB800823C2B /* PostViewController.swift in Sources */,
+				1EDE2E602993F39A00F0FE1A /* ProfileHeaderView.swift in Sources */,
 				1E17904C298C1DB800823C2B /* AppDelegate.swift in Sources */,
 				1E179067298C284800823C2B /* MainTabBarViewController.swift in Sources */,
 				1E179072298D177C00823C2B /* CradientButton.swift in Sources */,

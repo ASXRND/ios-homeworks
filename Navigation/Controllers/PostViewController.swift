@@ -9,12 +9,6 @@ import UIKit
 
 final class PostViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.5803921569, blue: 0.3254901961, alpha: 1)
-        barBattonItem()
-    }
-
     //MARK: - Add BarBatton
     private func barBattonItem() {
         lazy var barBatton = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(barItemAction))
@@ -27,5 +21,12 @@ final class PostViewController: UIViewController {
         let infoVC = InfoViewController()
         present(infoVC, animated: true)
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.5803921569, blue: 0.3254901961, alpha: 1)
+        barBattonItem()
+    }
+
 }
 
