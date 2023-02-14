@@ -12,20 +12,21 @@ final class MainTabBarViewController: UITabBarController {
     
     private var profileViewController = ProfileViewController()
     private var feedViewController = FeedViewController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         generateTabBar()
         setTabBarAppearance()
-        
     }
+
     //MARK: - Creation VC
     private func generateTabBar() {
         viewControllers = [
-            createNavController(vc: feedViewController, itemName: "Feed", itemImage: "light.ribbon"),
-            createNavController(vc: profileViewController, itemName: "Profile", itemImage: "person.fill")
+            createNavController(vc: profileViewController, itemName: "Profile", itemImage: "person.fill"),
+            createNavController(vc: feedViewController, itemName: "Feed", itemImage: "light.ribbon")
         ]
     }
+
     //MARK: - Settings NC
     private func createNavController(vc: UIViewController, itemName: String, itemImage: String) -> UINavigationController {
         let item = UITabBarItem(title: itemName, image: UIImage(systemName: itemImage)?.withAlignmentRectInsets(.init(top: 5, left: 0, bottom: 0, right: 0)), tag: 0)
@@ -43,7 +44,6 @@ final class MainTabBarViewController: UITabBarController {
         let positionOnY: CGFloat = 14
         let width = tabBar.bounds.width - positionOnX * 2
         let height = tabBar.bounds.height + positionOnY * 2
-        
         let roundLayer = CAShapeLayer()
         let bezierPath = UIBezierPath(
             roundedRect: CGRect(
@@ -54,7 +54,6 @@ final class MainTabBarViewController: UITabBarController {
             ),
             cornerRadius: height / 2
         )
-        
         roundLayer.path = bezierPath.cgPath
         tabBar.layer.insertSublayer(roundLayer, at: 0)
         tabBar.itemWidth = width / 5

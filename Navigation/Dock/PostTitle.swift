@@ -7,10 +7,9 @@
 
 import Foundation
 
-//MARK: - Title PostVeewController
+//MARK: - Struct Post
 struct Post {
 
-    let title: String
+    let text: String
 }
-
 
