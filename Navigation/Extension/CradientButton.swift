@@ -12,12 +12,12 @@ final class CradientButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [#colorLiteral(red: 0.3098039216, green: 0.6274509804, blue: 0.9803921569, alpha: 1).cgColor, #colorLiteral(red: 0.2, green: 0.3725490196, blue: 0.8196078431, alpha: 1).cgColor]
+        gradient.cornerRadius = 16
+        layer.addSublayer(gradient)
 
-        let gradien = CAGradientLayer()
-        gradien.frame = bounds
-        gradien.colors = [#colorLiteral(red: 0.3098039216, green: 0.6274509804, blue: 0.9803921569, alpha: 1).cgColor, #colorLiteral(red: 0.2, green: 0.3725490196, blue: 0.8196078431, alpha: 1).cgColor]
-        gradien.cornerRadius = 16
-        layer.addSublayer(gradien)
     }
 
     required init?(coder: NSCoder) {
