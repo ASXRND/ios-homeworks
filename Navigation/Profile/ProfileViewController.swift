@@ -8,27 +8,30 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-
+    
     //MARK: - Add Sub View
     private lazy var profileView: ProfileHeaderView = {
         let profileView = ProfileHeaderView()
-        profileView.backgroundColor = .white
+        profileView.backgroundColor = #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
+        profileView.translatesAutoresizingMaskIntoConstraints = false
         return profileView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.9625412822, green: 0.9625412822, blue: 0.9625412822, alpha: 1)
         title = "Profile"
         setupView()
+        setupConstraints()
     }
-}
 
-//MARK: - Add Constraints
-extension ProfileViewController {
+    //MARK: - Setup View
+    private func setupView() {
+        view.addSubview(profileView)
+    }
 
-    internal override func viewWillLayoutSubviews() {
-        profileView.translatesAutoresizingMaskIntoConstraints = false
+    //MARK: - Setup Constraints
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
 
             profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
@@ -39,11 +42,10 @@ extension ProfileViewController {
     }
 }
 
-//MARK: - Setup View
-extension ProfileViewController {
 
-    private func setupView() {
-        view.addSubview(profileView)
-    }
-}
+
+
+
+
+
 

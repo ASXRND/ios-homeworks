@@ -13,74 +13,70 @@ final class ProfileHeaderView: UIView {
 
     //MARK: - Add Avatar Image
     private lazy var avatarImage: UIImageView = {
-        let avatarImage = UIImageView()
-        avatarImage.image = UIImage(named: "ava")
-        avatarImage.layer.cornerRadius = 55
-        avatarImage.contentMode = .scaleAspectFit
-        avatarImage.clipsToBounds = true
-        avatarImage.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-        avatarImage.layer.borderWidth = 3
-        avatarImage.translatesAutoresizingMaskIntoConstraints = false
-        return avatarImage
-    }()
+        $0.image = UIImage(named: "ava")
+        $0.layer.cornerRadius = 55
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+        $0.layer.borderWidth = 3
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIImageView())
 
     //MARK: - Add Title Label
-    private lazy var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.text = "Hipster Minions"
-        titleLabel.textColor = .black
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        return titleLabel
-    }()
+    private lazy var fullNameLabel: UILabel = {
+        $0.text = "Hipster Minions"
+        $0.textColor = .black
+        $0.font = .systemFont(ofSize: 18, weight: .bold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
 
     //MARK: - Add Waiting Label
-    private lazy var waitingLabel: UILabel = {
-        let waitingLabel = UILabel()
-        waitingLabel.text = "Waiting for something"
-        waitingLabel.textColor = .gray
-        waitingLabel.font = .systemFont(ofSize: 14, weight: .regular)
-        waitingLabel.translatesAutoresizingMaskIntoConstraints = false
-        return waitingLabel
-    }()
+    private lazy var statusLabel: UILabel = {
+        $0.text = "Waiting for something"
+        $0.textColor = .gray
+        $0.font = .systemFont(ofSize: 14, weight: .regular)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
 
     //MARK: - Add Avatar Buttom
-    private lazy var avatarButtom: UIButton = {
-        let avatarButtom = UIButton(type: .system)
-        avatarButtom.setTitle("Show status", for: .normal)
-        avatarButtom.backgroundColor = #colorLiteral(red: 0, green: 0.5695073605, blue: 1, alpha: 1)
-        avatarButtom.tintColor = .white
-        avatarButtom.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        avatarButtom.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        avatarButtom.layer.shadowOpacity = 0.7
-        avatarButtom.layer.shadowOffset = CGSizeMake(4.0, 4.0)
-        avatarButtom.layer.cornerRadius = 14
-        avatarButtom.translatesAutoresizingMaskIntoConstraints = false
-        avatarButtom.addTarget(self, action: #selector(avatarButtomAction), for: .touchDown)
-        return avatarButtom
-    }()
+    private lazy var setStatusButton: UIButton = {
+        $0.setTitle("Show status", for: .normal)
+        $0.backgroundColor = #colorLiteral(red: 0, green: 0.5695073605, blue: 1, alpha: 1)
+        $0.tintColor = .white
+        $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
+        $0.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        $0.layer.shadowOpacity = 0.7
+        $0.layer.shadowOffset = CGSizeMake(4.0, 4.0)
+        $0.layer.cornerRadius = 14
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isEnabled = false
+        $0.addTarget(self, action: #selector(avatarButtomAction), for: .touchDown)
+        return $0
+    }(UIButton())
 
     //MARK: - Add Text Field
-    private lazy var myTextField: UITextField = {
-        let myTextField = UITextField()
-        myTextField.backgroundColor = #colorLiteral(red: 0.9561659694, green: 0.9591339231, blue: 0.9530903697, alpha: 1)
-        myTextField.textColor = .black
-        myTextField.placeholder = "Enter new status"
-        myTextField.layer.cornerRadius = 12
-        myTextField.font = .systemFont(ofSize: 15, weight: .regular)
-        myTextField.textAlignment = .center
-        myTextField.layer.borderWidth = 1
-        myTextField.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        myTextField.translatesAutoresizingMaskIntoConstraints = false
-        myTextField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
-        return myTextField
-    }()
+    private lazy var statusTextField: UITextField = {
+        $0.backgroundColor = #colorLiteral(red: 0.9561659694, green: 0.9591339231, blue: 0.9530903697, alpha: 1)
+        $0.textColor = .black
+        $0.placeholder = "Enter new status"
+        $0.layer.cornerRadius = 12
+        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.textAlignment = .center
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
+        return $0
+    }(UITextField())
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
-
+        addTap()
     }
 
     required init?(coder: NSCoder) {
@@ -89,8 +85,7 @@ final class ProfileHeaderView: UIView {
 
     //MARK: - Action Avatar Buttom
     @objc func avatarButtomAction(selector: UIButton) {
-        waitingLabel.text = statusText
-
+        statusLabel.text = statusText
     }
 
     //MARK: - Action Text Field
@@ -100,13 +95,25 @@ final class ProfileHeaderView: UIView {
         }
     }
 
+    //MARK: - Remove Keyboard
+    private func addTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        addGestureRecognizer(tap)
+
+    }
+    //MARK: - Action Remove Keyboard
+    @objc func hideKeyboard() {
+        endEditing(true)
+    }
+
     //MARK: - Setup View
     private func setupView() {
         addSubview(avatarImage)
-        addSubview(avatarButtom)
-        addSubview(titleLabel)
-        addSubview(waitingLabel)
-        addSubview(myTextField)
+        addSubview(setStatusButton)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
+        addSubview(statusTextField)
+        statusTextField.delegate = self
     }
 
     //MARK: - Setup Constraints
@@ -120,21 +127,29 @@ final class ProfileHeaderView: UIView {
             avatarImage.widthAnchor.constraint(equalToConstant: 110),
             avatarImage.heightAnchor.constraint(equalToConstant: 110),
 
-            titleLabel.topAnchor.constraint(equalTo: avatarImage.topAnchor, constant: 14),
-            titleLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 17),
+            fullNameLabel.topAnchor.constraint(equalTo: avatarImage.topAnchor, constant: 14),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 17),
 
-            waitingLabel.bottomAnchor.constraint(equalTo: myTextField.topAnchor, constant: -7),
-            waitingLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 17),
+            statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -7),
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.widthAnchor.constraint(equalToConstant: statusLabel.intrinsicContentSize.width),
 
-            avatarButtom.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 43),
-            avatarButtom.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            avatarButtom.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            avatarButtom.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 43),
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -0),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 43),
 
-            myTextField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 16),
-            myTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            myTextField.bottomAnchor.constraint(equalTo: avatarButtom.topAnchor, constant: -16),
-            myTextField.heightAnchor.constraint(equalToConstant: 40)
+            statusTextField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 16),
+            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            statusTextField.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
         ])
+    }
+}
+//MARK: - Blocking SetStatusButton if there is no text
+extension ProfileHeaderView: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        setStatusButton.isEnabled = !text.isEmpty
     }
 }
