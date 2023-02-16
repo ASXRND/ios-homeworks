@@ -12,6 +12,7 @@ final class MainTabBarViewController: UITabBarController {
     
     private var profileViewController = ProfileViewController()
     private var feedViewController = FeedViewController()
+    private var logInViewController = LogInViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ final class MainTabBarViewController: UITabBarController {
     //MARK: - Creation VC
     private func generateTabBar() {
         viewControllers = [
+            createNavController(vc: logInViewController, itemName: "logIn", itemImage: "personalhotspot"),
             createNavController(vc: profileViewController, itemName: "Profile", itemImage: "person.fill"),
             createNavController(vc: feedViewController, itemName: "Feed", itemImage: "light.ribbon")
         ]

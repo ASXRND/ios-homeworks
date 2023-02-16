@@ -13,14 +13,15 @@ final class FeedViewController: UIViewController {
 
     //MARK: - Add Stack View
     private let stackView: UIStackView = {
-        $0.axis = .horizontal
-        $0.spacing = 10
-        $0.backgroundColor = #colorLiteral(red: 0.788644433, green: 0.8879172206, blue: 0.9848760962, alpha: 1)
-        $0.alignment = .center
-        $0.distribution = .fillEqually
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        return $0
-    }(UIStackView())
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.backgroundColor = #colorLiteral(red: 0.788644433, green: 0.8879172206, blue: 0.9848760962, alpha: 1)
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
 
     //MARK: - Add Button Go to post
     private lazy var postButton: UIButton = {
