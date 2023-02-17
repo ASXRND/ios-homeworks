@@ -84,12 +84,12 @@ final class ProfileHeaderView: UIView {
     }
 
     //MARK: - Action Avatar Buttom
-    @objc func avatarButtomAction(selector: UIButton) {
+    @objc private func avatarButtomAction(selector: UIButton) {
         statusLabel.text = statusText
     }
 
     //MARK: - Action Text Field
-    @objc func textFieldAction(_ textField:  UITextField) {
+    @objc private func textFieldAction(_ textField:  UITextField) {
         if textField.text?.isEmpty != nil {
             statusText = textField.text!
         }
@@ -102,7 +102,7 @@ final class ProfileHeaderView: UIView {
 
     }
     //MARK: - Action Remove Keyboard
-    @objc func hideKeyboard() {
+    @objc private func hideKeyboard() {
         endEditing(true)
     }
 
@@ -146,7 +146,7 @@ final class ProfileHeaderView: UIView {
         ])
     }
 }
-//MARK: - Blocking SetStatusButton if there is no text
+//MARK: - Blocking Set Status Button if there is no text
 extension ProfileHeaderView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else { return }
