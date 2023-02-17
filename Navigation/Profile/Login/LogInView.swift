@@ -48,7 +48,6 @@ final class LogInView: UIView {
         textFild.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFild.frame.height))
         textFild.leftViewMode = .always
         textFild.autocapitalizationType = .none
-        textFild.isSecureTextEntry = true
         textFild.translatesAutoresizingMaskIntoConstraints = false
         return textFild
     }()
