@@ -9,7 +9,7 @@ import UIKit
 
 final class FeedViewController: UIViewController {
 
-    private let postTitle = Post(text: "PostStrucTitle")
+    private let postTitle = PostTitle(text: "PostStrucTitle")
 
     //MARK: - Add Stack View
     private let stackView: UIStackView = {

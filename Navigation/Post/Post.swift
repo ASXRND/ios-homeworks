@@ -5,11 +5,10 @@
 //  Created by Александр on 03.02.2023.
 //
 
-import Foundation
+import UIKit
 
-//MARK: - Struct Post
-struct Post {
+//MARK: - Struct Post Title
+struct PostTitle {
 
     let text: String
 }
-

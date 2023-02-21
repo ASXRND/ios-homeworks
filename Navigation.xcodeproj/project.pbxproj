@@ -18,9 +18,12 @@
 		1E17906D298C365C00823C2B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17906C298C365C00823C2B /* ProfileViewController.swift */; };
 		1E179070298C5EED00823C2B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17906F298C5EED00823C2B /* UIColorExtension.swift */; };
 		1E179072298D177C00823C2B /* CradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E179071298D177C00823C2B /* CradientButton.swift */; };
-		1E179075298D26DB00823C2B /* PostTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E179074298D26DB00823C2B /* PostTitle.swift */; };
+		1E179075298D26DB00823C2B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E179074298D26DB00823C2B /* Post.swift */; };
 		1EC672CE299E303500FDDECD /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672CD299E303500FDDECD /* LogInViewController.swift */; };
 		1EC672D1299E47D900FDDECD /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672D0299E47D900FDDECD /* LogInView.swift */; };
+		1EC672D5299FCC2B00FDDECD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672D4299FCC2B00FDDECD /* PostTableViewCell.swift */; };
+		1EC672D9299FD4C800FDDECD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672D8299FD4C800FDDECD /* UIView+Extension.swift */; };
+		1EDE0EF529A2A10F00A6925B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE0EF429A2A10F00A6925B /* Model.swift */; };
 		1EDE2E602993F39A00F0FE1A /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE2E5F2993F39A00F0FE1A /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,9 +41,12 @@
 		1E17906C298C365C00823C2B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1E17906F298C5EED00823C2B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		1E179071298D177C00823C2B /* CradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CradientButton.swift; sourceTree = "<group>"; };
-		1E179074298D26DB00823C2B /* PostTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitle.swift; sourceTree = "<group>"; };
+		1E179074298D26DB00823C2B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1EC672CD299E303500FDDECD /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		1EC672D0299E47D900FDDECD /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		1EC672D4299FCC2B00FDDECD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		1EC672D8299FD4C800FDDECD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		1EDE0EF429A2A10F00A6925B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		1EDE2E5F2993F39A00F0FE1A /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,7 +80,7 @@
 		1E17904A298C1DB800823C2B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				1E179073298D26BF00823C2B /* Dock */,
+				1E179073298D26BF00823C2B /* Post */,
 				1E17906E298C5ECD00823C2B /* Extension */,
 				1EDE2E5D2993F31200F0FE1A /* Profile */,
 				1E179062298C1EF100823C2B /* Controllers */,
@@ -119,16 +125,18 @@
 			children = (
 				1E17906F298C5EED00823C2B /* UIColorExtension.swift */,
 				1E179071298D177C00823C2B /* CradientButton.swift */,
+				1EC672D8299FD4C800FDDECD /* UIView+Extension.swift */,
+				1EC672CF299E356B00FDDECD /* Login */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		1E179073298D26BF00823C2B /* Dock */ = {
+		1E179073298D26BF00823C2B /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				1E179074298D26DB00823C2B /* PostTitle.swift */,
+				1E179074298D26DB00823C2B /* Post.swift */,
 			);
-			path = Dock;
+			path = Post;
 			sourceTree = "<group>";
 		};
 		1EC672CF299E356B00FDDECD /* Login */ = {
@@ -140,22 +148,47 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		1EC672D6299FD10800FDDECD /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				1EDE2E5F2993F39A00F0FE1A /* ProfileHeaderView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		1EC672D7299FD12200FDDECD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1EC672D4299FCC2B00FDDECD /* PostTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		1EDE0EF329A2A0EB00A6925B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1EDE0EF429A2A10F00A6925B /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1EDE2E5D2993F31200F0FE1A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				1EC672CF299E356B00FDDECD /* Login */,
-				1EDE2E5E2993F34300F0FE1A /* Profile */,
+				1EDE2E5E2993F34300F0FE1A /* Controllers */,
+				1EC672D7299FD12200FDDECD /* Cell */,
+				1EC672D6299FD10800FDDECD /* Header */,
+				1EDE0EF329A2A0EB00A6925B /* Model */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		1EDE2E5E2993F34300F0FE1A /* Profile */ = {
+		1EDE2E5E2993F34300F0FE1A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				1E17906C298C365C00823C2B /* ProfileViewController.swift */,
-				1EDE2E5F2993F39A00F0FE1A /* ProfileHeaderView.swift */,
 			);
-			path = Profile;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,13 +261,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E179075298D26DB00823C2B /* PostTitle.swift in Sources */,
+				1E179075298D26DB00823C2B /* Post.swift in Sources */,
 				1E179050298C1DB800823C2B /* PostViewController.swift in Sources */,
 				1EDE2E602993F39A00F0FE1A /* ProfileHeaderView.swift in Sources */,
+				1EC672D9299FD4C800FDDECD /* UIView+Extension.swift in Sources */,
 				1E17904C298C1DB800823C2B /* AppDelegate.swift in Sources */,
 				1E179067298C284800823C2B /* MainTabBarViewController.swift in Sources */,
 				1E179072298D177C00823C2B /* CradientButton.swift in Sources */,
+				1EDE0EF529A2A10F00A6925B /* Model.swift in Sources */,
 				1E179069298C2F9F00823C2B /* InfoViewController.swift in Sources */,
+				1EC672D5299FCC2B00FDDECD /* PostTableViewCell.swift in Sources */,
 				1E17906D298C365C00823C2B /* ProfileViewController.swift in Sources */,
 				1EC672CE299E303500FDDECD /* LogInViewController.swift in Sources */,
 				1E179070298C5EED00823C2B /* UIColorExtension.swift in Sources */,

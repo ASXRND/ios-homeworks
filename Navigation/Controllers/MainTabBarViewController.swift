@@ -9,22 +9,20 @@ import UIKit
 
 //MARK: - TabBarController
 final class MainTabBarViewController: UITabBarController {
-    
-    private var profileViewController = ProfileViewController()
+
     private var feedViewController = FeedViewController()
     private var logInViewController = LogInViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         generateTabBar()
-        setTabBarAppearance()
+        //setTabBarAppearance()
     }
     
     //MARK: - Creation VC
     private func generateTabBar() {
         viewControllers = [
             createNavController(vc: logInViewController, itemName: "logIn", itemImage: "personalhotspot"),
-            createNavController(vc: profileViewController, itemName: "Profile", itemImage: "person.fill"),
             createNavController(vc: feedViewController, itemName: "Feed", itemImage: "light.ribbon")
         ]
     }
@@ -38,30 +36,5 @@ final class MainTabBarViewController: UITabBarController {
         navController.tabBarItem = item
         
         return navController
-    }
-    
-    //MARK: - Settings TB
-    private func setTabBarAppearance() {
-        let positionOnX: CGFloat = 10
-        let positionOnY: CGFloat = 16
-        
-        let width = tabBar.bounds.width - positionOnX * 2
-        let height = tabBar.bounds.height + positionOnY * 2
-        let roundLayer = CAShapeLayer()
-        let bezierPath = UIBezierPath(
-            roundedRect: CGRect(
-                x: positionOnX,
-                y: tabBar.bounds.minY - positionOnY,
-                width: width,
-                height: height
-            ),
-            cornerRadius: height / 2
-        )
-        roundLayer.path = bezierPath.cgPath
-        tabBar.layer.insertSublayer(roundLayer, at: 0)
-        tabBar.itemWidth = width / 5
-        roundLayer.fillColor = UIColor.mainHeavenly.cgColor
-        tabBar.tintColor = .tabBarItemAccent
-        tabBar.unselectedItemTintColor = .tabBarItemLight
     }
 }
