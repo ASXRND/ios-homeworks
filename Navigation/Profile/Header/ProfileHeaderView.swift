@@ -124,26 +124,28 @@ final class ProfileHeaderView: UIView {
         NSLayoutConstraint.activate([
 
             avatarImage.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            avatarImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             avatarImage.widthAnchor.constraint(equalToConstant: 110),
             avatarImage.heightAnchor.constraint(equalToConstant: 110),
 
             fullNameLabel.topAnchor.constraint(equalTo: avatarImage.topAnchor, constant: 14),
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 17),
+            fullNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             fullNameLabel.widthAnchor.constraint(equalToConstant: fullNameLabel.intrinsicContentSize.width),
 
             statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -7),
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             statusLabel.widthAnchor.constraint(equalToConstant: statusLabel.intrinsicContentSize.width),
 
             statusTextField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 16),
-            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             statusTextField.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
 
             setStatusButton.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 43),
-            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 43),
         ])
     }
