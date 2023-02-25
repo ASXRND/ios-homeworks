@@ -80,6 +80,7 @@
 		1E17904A298C1DB800823C2B /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				1EA0D7E929A9FCFF00B5C349 /* Photos */,
 				1E179073298D26BF00823C2B /* Post */,
 				1E17906E298C5ECD00823C2B /* Extension */,
 				1EDE2E5D2993F31200F0FE1A /* Profile */,
@@ -137,6 +138,13 @@
 				1E179074298D26DB00823C2B /* Post.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		1EA0D7E929A9FCFF00B5C349 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Photos;
 			sourceTree = "<group>";
 		};
 		1EC672CF299E356B00FDDECD /* Login */ = {
