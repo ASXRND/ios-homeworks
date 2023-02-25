@@ -86,30 +86,28 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(likesLabe)
         contentView.addSubview(viewsLabel)
 
-        let inset: CGFloat = 16
-
         NSLayoutConstraint.activate([
 
-            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            myImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: inset),
+            myImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 16),
             myImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             myImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             myImageView.heightAnchor.constraint(equalToConstant: screenWidth),
 
-            descriptionLabel.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: inset),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            descriptionLabel.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 16),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            likesLabe.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: inset),
-            likesLabe.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            likesLabe.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
+            likesLabe.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            likesLabe.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            likesLabe.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
 
-            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: inset),
-            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
+            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
 
         ])
     }

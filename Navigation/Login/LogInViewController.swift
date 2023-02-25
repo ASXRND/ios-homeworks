@@ -19,6 +19,7 @@ final class LogInViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
+        hideNavigationBar()
         view = loginView
         loginView.loginButton.addTarget(self, action: #selector(actionloginButton), for: .touchUpInside)
 

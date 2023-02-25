@@ -9,31 +9,34 @@ import UIKit
 
 final class CollectionViewCell: UICollectionViewCell {
 
-    var imageView = UIImageView()
+    //MARK: - Add Image View
+    var colImageView: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
-        setupCell()
+        setupLayoutConstraints()
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
 
-    func setupCell() {
-        self.contentView.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        self.clipsToBounds = true
+    //MARK: - Setup Layout Constraints
+    private func setupLayoutConstraints() {
+        contentView.addSubview(colImageView)
 
         NSLayoutConstraint.activate ([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            colImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            colImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            colImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            colImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-
 }
 
