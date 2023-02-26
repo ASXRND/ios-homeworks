@@ -11,6 +11,7 @@ final class PhotosViewController: UIViewController {
 
     let photoGallery: [ImageGallery] = PhotoGallery.randomPhotos(with: 33)
 
+    //MARK: - Add Collection View
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
 
@@ -24,9 +25,6 @@ final class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayoutConstraints()
-        showNavigationBar()
-        #warning("разобраться с появлением и исчизновением навигатион бар")
-        navigationItem.title = "Photos Gallery"
         setupCollectionView()
     }
 
@@ -47,6 +45,21 @@ final class PhotosViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showNavigationBar()
+    }
+
+    //MARK: - Show Navigation Bar
+   private func showNavigationBar() {
+       navigationController?.setNavigationBarHidden(false, animated: true)
+       title = "Gallery"
+       navigationController?.navigationBar.barStyle = .black
+       navigationController?.navigationBar.backgroundColor = .white
+       navigationController?.navigationBar.shadowImage = UIImage()
+       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+   }
 }
 
 //MARK: - Extension UICollectionViewDataSource
@@ -63,6 +76,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
 //MARK: - Extension UICollectionViewDelegateFlowLayout
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     private var sideInset: CGFloat { return 8 }
@@ -84,19 +98,5 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         sideInset
-    }
-}
-// расширение для скрытия navbar'a
-extension LogInViewController {
-    func hideNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-}
-
-// расширение для показа navbar'a
-extension PhotosViewController {
-    func showNavigationBar() {
-
-        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }

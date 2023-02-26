@@ -15,14 +15,13 @@ final class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
+        hideNavigationBar()
     }
 
     override func loadView() {
         super.loadView()
-        hideNavigationBar()
         view = loginView
         loginView.loginButton.addTarget(self, action: #selector(actionloginButton), for: .touchUpInside)
-
     }
 
     //MARK: - Action Login Button Show ProfileViewController
@@ -37,7 +36,7 @@ final class LogInViewController: UIViewController {
         notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         notification.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     //MARK: - Unsubscribe From Observers
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -57,5 +56,12 @@ final class LogInViewController: UIViewController {
     @objc private func keyboardWillHide() {
         loginView.scrollView.contentInset = .zero
         loginView.scrollView.verticalScrollIndicatorInsets = .zero
+    }
+}
+
+//MARK: - Hide Navigation Bar
+extension LogInViewController {
+    func hideNavigationBar() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }

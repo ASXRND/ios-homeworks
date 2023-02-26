@@ -76,6 +76,7 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
 
+    //MARK: - Gallery Button Action
     @objc private func galleryButtonAction() {
         let photosVC = PhotosViewController()
         navigationController?.pushViewController(photosVC, animated: true)
@@ -92,9 +93,6 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-
-
-
 }
 
 //MARK: - Extension UITableViewDelegate

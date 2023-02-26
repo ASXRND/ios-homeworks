@@ -34,7 +34,7 @@ final class LogInView: UIView {
         return image
     }()
 
-    //MARK: - Email TextFild
+    //MARK: - Email Text Fild
     private lazy var emailTextFild: UITextField = {
         let textFild = UITextField()
         textFild.layer.borderColor = UIColor.lightGray.cgColor
@@ -52,7 +52,7 @@ final class LogInView: UIView {
         return textFild
     }()
 
-    //MARK: - Password TextFild
+    //MARK: - Password Text Fild
     private lazy var passwordTextFild: UITextField = {
         let textFild = UITextField()
         textFild.layer.borderColor = UIColor.lightGray.cgColor
@@ -164,5 +164,4 @@ extension LogInView: UITextFieldDelegate {
     @objc private func hideKeyboard() {
         endEditing(true)
     }
-
 }
