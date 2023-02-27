@@ -14,9 +14,8 @@ final class PhotosViewController: UIViewController {
     //MARK: - Add Collection View
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = #colorLiteral(red: 0.880133905, green: 0.9995045834, blue: 1, alpha: 1)
+        view.backgroundColor = .white
         view.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -26,6 +25,7 @@ final class PhotosViewController: UIViewController {
         super.viewDidLoad()
         setupLayoutConstraints()
         setupCollectionView()
+        view.backgroundColor = .white
     }
 
     //MARK: - Setup Collection View
@@ -55,8 +55,8 @@ final class PhotosViewController: UIViewController {
    private func showNavigationBar() {
        navigationController?.setNavigationBarHidden(false, animated: true)
        title = "Gallery"
-       navigationController?.navigationBar.barStyle = .black
-       navigationController?.navigationBar.backgroundColor = .white
+       navigationController?.navigationBar.standardAppearance = UINavigationBarAppearance()
+       navigationController?.toolbar.backgroundColor = .white
        navigationController?.navigationBar.shadowImage = UIImage()
        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
    }
