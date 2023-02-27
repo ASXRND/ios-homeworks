@@ -16,7 +16,7 @@ final class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         generateTabBar()
-        //setTabBarAppearance()
+        tabBar.backgroundColor = .white
     }
     
     //MARK: - Creation VC
