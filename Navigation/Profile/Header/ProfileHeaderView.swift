@@ -15,7 +15,7 @@ final class ProfileHeaderView: UIView {
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "ava")
-        image.layer.cornerRadius = 55
+        image.layer.cornerRadius = 50
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         image.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
@@ -78,10 +78,31 @@ final class ProfileHeaderView: UIView {
         return button
     }()
 
+    private lazy var crossButton: UIButton = {
+        let crossButton = UIButton()
+        crossButton.translatesAutoresizingMaskIntoConstraints = false
+        crossButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        crossButton.tintColor = .systemGray4
+        crossButton.alpha = 0
+        crossButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        return crossButton
+    }()
+
+    private let blackView: UIView = {
+        let viewBlack = UIView()
+        viewBlack.translatesAutoresizingMaskIntoConstraints = false
+        viewBlack.alpha = 0
+        viewBlack.backgroundColor = .black
+        viewBlack.frame = UIScreen.main.bounds
+        return viewBlack
+    }()
+
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         setupLayoutConstraints()
+        setupGesture()
         addTap()
     }
 
@@ -112,9 +133,13 @@ final class ProfileHeaderView: UIView {
         endEditing(true)
     }
 
+    private var topImage = NSLayoutConstraint()
+    private var leadingImage = NSLayoutConstraint()
+    private var widthImage = NSLayoutConstraint()
+    private var heightImage = NSLayoutConstraint()
+
     //MARK: - Setup Layout Constraints
     private func setupLayoutConstraints() {
-
         addSubview(avatarImage)
         addSubview(setStatusButton)
         addSubview(fullNameLabel)
@@ -122,35 +147,93 @@ final class ProfileHeaderView: UIView {
         addSubview(statusTextField)
 
         let inset: CGFloat = 16
-        
+
+        topImage = avatarImage.topAnchor.constraint(equalTo: topAnchor, constant: 20)
+        leadingImage = avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset)
+        widthImage = avatarImage.widthAnchor.constraint(equalToConstant: 100)
+        heightImage = avatarImage.heightAnchor.constraint(equalToConstant: 100)
+
         NSLayoutConstraint.activate([
 
-            avatarImage.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            avatarImage.widthAnchor.constraint(equalToConstant: 110),
-            avatarImage.heightAnchor.constraint(equalToConstant: 110),
+            topImage, leadingImage, widthImage, heightImage,
 
-            fullNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 33),
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 17),
-            fullNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
+            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 130),
+            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            fullNameLabel.heightAnchor.constraint(equalToConstant: 20),
 
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 35),
-            statusLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: inset),
-            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
+            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 30),
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+            statusLabel.heightAnchor.constraint(equalToConstant: 20),
 
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 7),
-            statusTextField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: inset),
-            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
+            statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusTextField.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
 
-            setStatusButton.topAnchor.constraint(equalTo: topAnchor, constant: 170),
-            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
+            setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: inset),
+            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
             setStatusButton.heightAnchor.constraint(equalToConstant: 43),
-            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
+            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+
         ])
     }
+
+
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionTap))
+        avatarImage.isUserInteractionEnabled = true
+        avatarImage.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func actionTap() {
+        addSubview(blackView)
+        addSubview(crossButton)
+        bringSubviewToFront(avatarImage)
+
+        NSLayoutConstraint.activate([
+            crossButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            crossButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            crossButton.widthAnchor.constraint(equalToConstant: 30),
+            crossButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.blackView.alpha = 0.8
+            self.avatarImage.layer.cornerRadius = 0
+            self.topImage.constant = 100
+            self.leadingImage.constant = 0
+            self.widthImage.constant = UIScreen.main.bounds.width
+            self.heightImage.constant = UIScreen.main.bounds.width
+            self.layoutIfNeeded()
+
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.crossButton.alpha = 1
+            }
+        }
+    }
+
+    @objc private func cancelAction() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.crossButton.alpha = 0
+
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+                self.avatarImage.layer.cornerRadius = 50
+                self.topImage.constant = 0
+                self.leadingImage.constant = 16
+                self.widthImage.constant = 100
+                self.heightImage.constant = 100
+                self.blackView.alpha = 0
+                self.layoutIfNeeded()
+            }
+        }
+    }
 }
+
 //MARK: - Blocking Set Status Button if there is no text
 extension ProfileHeaderView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -164,3 +247,4 @@ extension ProfileHeaderView: UITextFieldDelegate {
         return true
     }
 }
+
