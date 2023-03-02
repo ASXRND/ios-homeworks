@@ -31,19 +31,6 @@ struct PhotoGallery {
             .init(id: 18, imageName: "Kristen Jaymes Stewart"),
             .init(id: 19, imageName: "Ksenia Sukhinova"),
             .init(id: 20, imageName: "Linda Evangelista"),
-            .init(id: 21, imageName: "Margot Elise Robbie"),
-            .init(id: 22, imageName: "Milla Jovovich"),
-            .init(id: 23, imageName: "Natalie Portman"),
-            .init(id: 24, imageName: "Natalya Vodyanova"),
-            .init(id: 25, imageName: "Nathalie Kelley"),
-            .init(id: 26, imageName: "Nina Dobrev"),
-            .init(id: 27, imageName: "Oksana Fedorova"),
-            .init(id: 28, imageName: "Olivia Jane Cockburn"),
-            .init(id: 29, imageName: "Paulina Andreeva"),
-            .init(id: 30, imageName: "Polina Gagarina"),
-            .init(id: 31, imageName: "Robyn Rihanna Fenty"),
-            .init(id: 32, imageName: "Sasha Luss"),
-            .init(id: 33, imageName: "Taylor Alison Swift")
         ]
     }
 
