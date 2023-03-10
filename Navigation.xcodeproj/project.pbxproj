@@ -151,8 +151,9 @@
 		1EA0D7E929A9FCFF00B5C349 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				1ECAB13029AA446A00070F5C /* Model */,
 				1ECAB12F29AA441800070F5C /* Controllers */,
+				1ECAB12E29AA43F400070F5C /* Cell */,
+				1ECAB13029AA446A00070F5C /* Model */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -203,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				1ECAB13129AA44B900070F5C /* PhotoGallery.swift */,
-				1ECAB12E29AA43F400070F5C /* Cell */,
 			);
 			path = Model;
 			sourceTree = "<group>";

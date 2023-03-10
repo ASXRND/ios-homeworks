@@ -9,7 +9,7 @@ import UIKit
 
 final class PhotosViewController: UIViewController {
 
-    let photoGallery: [ImageGallery] = PhotoGallery.randomPhotos(with: 20)
+    let photoGallery: [PhotoGallery] = PhotoGallery.setupImage()
 
     //MARK: - Add Collection View
     private let collectionView: UICollectionView = {
@@ -20,6 +20,40 @@ final class PhotosViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
+    // Создаю черную вью для заднего фона при открытии фото на весь экран
+    private let blackView: UIView = {
+        let view = UIView()
+        view.frame = UIScreen.main.bounds
+        view.backgroundColor = .black
+        view.alpha = 0.8
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.opacity = 0
+        return view
+    }()
+
+    // Создаю кнопку крестик для выхода из полноэкранного режима
+    private lazy var buttonCancelAnimation: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .systemGray4
+        button.alpha = 0
+        button.addTarget(self, action: #selector(cancelAnimationButton), for: .touchUpInside)
+        return button
+    }()
+
+    // Создаю UIImage для полноразмернного открытия фотографий
+    private let fullImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "original1"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.opacity = 0
+        imageView.layer.masksToBounds = false
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +71,27 @@ final class PhotosViewController: UIViewController {
     //MARK: - Setup Layout Constraints
     private func setupLayoutConstraints() {
         view.addSubview(collectionView)
+        view.addSubview(blackView)
+        view.addSubview(buttonCancelAnimation)
+        view.addSubview(fullImageView)
+
 
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
+            fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fullImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            fullImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            fullImageView.heightAnchor.constraint(equalTo: fullImageView.widthAnchor, multiplier: 1),
+
+            buttonCancelAnimation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            buttonCancelAnimation.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8),
+            buttonCancelAnimation.widthAnchor.constraint(equalToConstant: 40),
+            buttonCancelAnimation.heightAnchor.constraint(equalTo: buttonCancelAnimation.widthAnchor, multiplier: 1)
+
         ])
     }
 
@@ -72,7 +121,8 @@ extension PhotosViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.colImageView.image = UIImage(named: photoGallery[indexPath.item].imageName)
+        cell.buttonAllPhotoCellDelegate = self
+        cell.collectionImageView.image = UIImage(named: photoGallery[indexPath.item].image)
         return cell
     }
 }
@@ -98,5 +148,49 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         sideInset
+    }
+}
+// MARK: - PhotoCellDelegate
+
+extension PhotosViewController: PhotoCellDelegate {
+    func tapAction(photo: UIImage) {
+        self.fullImageView.image = photo
+        self.fullImageView.isUserInteractionEnabled = true
+        self.navigationController?.isNavigationBarHidden = true
+
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+
+            self.blackView.layer.opacity = 0.8
+            self.fullImageView.layer.opacity = 1
+            self.view.layoutIfNeeded()
+
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.0) {
+                self.buttonCancelAnimation.layer.opacity = 1
+            }
+        }
+    }
+
+    @objc func cancelAnimationButton() {
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+            self.buttonCancelAnimation.layer.opacity = 0
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5,
+                           delay: 0.0) {
+                self.blackView.layer.opacity = 0.0
+                self.fullImageView.layer.opacity = 0
+                self.navigationController?.isNavigationBarHidden = false
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }
