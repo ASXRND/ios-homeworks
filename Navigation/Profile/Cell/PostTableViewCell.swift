@@ -7,7 +7,17 @@
 
 import UIKit
 
+// MARK: - Protocol TapPostImageDelegate Протокол для перехода к полному описанию поста с счетчиком просмотров
+protocol TapPostImageDelegate: AnyObject {
+    func postImagePress(author: String, description: String, image: String)
+}
+
 class PostTableViewCell: UITableViewCell {
+    // MARK: - Public Properties
+
+    weak var tapPostImageDelegate: TapPostImageDelegate?
+
+    private var modelStar = Modelstar(author: "", image: "", likes: 900, views: 1, description: "")
 
     //MARK: - Add Author Label
     private lazy var authorLabel: UILabel = {
@@ -45,6 +55,7 @@ class PostTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
         return label
     }()
 
@@ -60,16 +71,37 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayoutConstraints()
+        setupGestures()
     }
 
     required init?(coder: NSCoder) {
         fatalError()
     }
 
+    // MARK: - SetupGestures
+    private func setupGestures() {
+        let tapLikeLabelGesture = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+
+    }
+
+    // MARK: - LikeAction
+    @objc private func likeAction() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+
+            self.modelStar.likes += 1
+            self.likesLabe.text = "Likes \(self.modelStar.likes)"
+        }
+    }
+
     //MARK: - Setup Cell
     func setupCell(model: Modelstar) {
+        modelStar = model
         authorLabel.text = model.author
-        myImageView.image = model.image
+        myImageView.image = UIImage(named: model.image)
         likesLabe.text = "Likes: \(model.likes)"
         viewsLabel.text = "Views: \(model.likes)"
         descriptionLabel.text = model.description
