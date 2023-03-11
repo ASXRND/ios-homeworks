@@ -50,7 +50,7 @@ class PostTableViewCell: UITableViewCell {
     }()
 
     //MARK: - Add Likes Label
-    private lazy var likesLabe: UILabel = {
+    private lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
@@ -81,6 +81,8 @@ class PostTableViewCell: UITableViewCell {
     // MARK: - SetupGestures
     private func setupGestures() {
         let tapLikeLabelGesture = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+        likesLabel.addGestureRecognizer(tapLikeLabelGesture)
+
 
     }
 
@@ -93,7 +95,7 @@ class PostTableViewCell: UITableViewCell {
                        options: .curveEaseInOut) {
 
             self.modelStar.likes += 1
-            self.likesLabe.text = "Likes \(self.modelStar.likes)"
+            self.likesLabel.text = "Likes \(self.modelStar.likes)"
         }
     }
 
@@ -102,8 +104,8 @@ class PostTableViewCell: UITableViewCell {
         modelStar = model
         authorLabel.text = model.author
         myImageView.image = UIImage(named: model.image)
-        likesLabe.text = "Likes: \(model.likes)"
-        viewsLabel.text = "Views: \(model.likes)"
+        likesLabel.text = "Likes: \(model.likes)"
+        viewsLabel.text = "Views: \(model.views)"
         descriptionLabel.text = model.description
     }
 
@@ -115,7 +117,7 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(authorLabel)
         contentView.addSubview(myImageView)
         contentView.addSubview(descriptionLabel)
-        contentView.addSubview(likesLabe)
+        contentView.addSubview(likesLabel)
         contentView.addSubview(viewsLabel)
 
         let inset: CGFloat = 16
@@ -135,9 +137,9 @@ class PostTableViewCell: UITableViewCell {
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
 
-            likesLabe.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: inset),
-            likesLabe.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            likesLabe.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
+            likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: inset),
+            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
 
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: inset),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
