@@ -7,17 +7,9 @@
 
 import UIKit
 
-// MARK: - Protocol TapPostImageDelegate Протокол для перехода к полному описанию поста с счетчиком просмотров
-protocol TapPostImageDelegate: AnyObject {
-    func postImagePress(author: String, description: String, image: String)
-}
-
 class PostTableViewCell: UITableViewCell {
-    // MARK: - Public Properties
 
-    weak var tapPostImageDelegate: TapPostImageDelegate?
-
-    private var modelStar = Modelstar(author: "", image: "", likes: 900, views: 1, description: "")
+    private var modelStar = Modelstar(author: "", image: "", likes: 1, views: 1, description: "")
 
     //MARK: - Add Author Label
     private lazy var authorLabel: UILabel = {

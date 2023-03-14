@@ -34,8 +34,31 @@ final class LogInView: UIView {
         return image
     }()
 
+     lazy var stackView: UIStackView = {
+       let stackView = UIStackView()
+       stackView.translatesAutoresizingMaskIntoConstraints = false
+       stackView.axis = .vertical
+       stackView.distribution = .fillEqually
+       stackView.layer.cornerRadius = 10
+       stackView.backgroundColor = .systemGray6
+       stackView.layer.borderColor = UIColor.lightGray.cgColor
+       stackView.layer.borderWidth = 0.5
+       stackView.layer.masksToBounds = true
+       return stackView
+   }()
+
+     lazy var alertLabel: UILabel = {
+       let labelAlert = UILabel()
+       labelAlert.translatesAutoresizingMaskIntoConstraints = false
+       labelAlert.text = "Password cannot be less than 8 characters"
+       labelAlert.textColor = .red
+       labelAlert.isHidden = true
+       labelAlert.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+       return labelAlert
+   }()
+
     //MARK: - Email Text Fild
-    private lazy var emailTextFild: UITextField = {
+     lazy var emailTextFild: UITextField = {
         let textFild = UITextField()
         textFild.layer.borderColor = UIColor.lightGray.cgColor
         textFild.layer.borderWidth = 0.5
@@ -53,7 +76,7 @@ final class LogInView: UIView {
     }()
 
     //MARK: - Password Text Fild
-    private lazy var passwordTextFild: UITextField = {
+     lazy var passwordTextFild: UITextField = {
         let textFild = UITextField()
         textFild.layer.borderColor = UIColor.lightGray.cgColor
         textFild.layer.borderWidth = 0.5
@@ -103,6 +126,11 @@ final class LogInView: UIView {
         contentView.addSubview(emailTextFild)
         contentView.addSubview(passwordTextFild)
         contentView.addSubview(loginButton)
+        contentView.addSubview(alertLabel)
+        contentView.addSubview(stackView)
+        stackView.addSubview(emailTextFild)
+        stackView.addSubview(passwordTextFild)
+
         emailTextFild.delegate = self
         passwordTextFild.delegate = self
     }
@@ -127,14 +155,24 @@ final class LogInView: UIView {
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
 
-            emailTextFild.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
-            emailTextFild.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            emailTextFild.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
+            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            stackView.heightAnchor.constraint(equalToConstant: 100),
+
+            alertLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            alertLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
+            alertLabel.bottomAnchor.constraint(equalTo: loginButton.topAnchor),
+
+            emailTextFild.topAnchor.constraint(equalTo: stackView.topAnchor),
+            emailTextFild.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            emailTextFild.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             emailTextFild.heightAnchor.constraint(equalToConstant: 50),
 
             passwordTextFild.topAnchor.constraint(equalTo: emailTextFild.bottomAnchor),
-            passwordTextFild.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            passwordTextFild.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            passwordTextFild.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            passwordTextFild.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             passwordTextFild.heightAnchor.constraint(equalToConstant: 50),
 
             loginButton.topAnchor.constraint(equalTo: passwordTextFild.bottomAnchor, constant: 16),
