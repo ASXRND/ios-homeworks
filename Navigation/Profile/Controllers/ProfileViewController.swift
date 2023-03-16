@@ -109,6 +109,18 @@ extension ProfileViewController: UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let model: Modelstar = modelStar[indexPath.section][indexPath.row] as? Modelstar {
+            let detailVC = DetailedViewController()
+            detailVC.viewsLabel.text = "Views: \(model.views)"
+            detailVC.likesLabel.text = "Likes: \(model.likes)"
+            detailVC.detailedImageView.image = UIImage(named: model.image)
+            detailVC.descriptionLabel.text = model.description
+            detailVC.titleLabel.text = model.author
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
+    }
 }
 
 
