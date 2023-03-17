@@ -14,7 +14,7 @@ final class CollectionViewCellTableView: UICollectionViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 10
+        image.layer.cornerRadius = 6
         image.clipsToBounds = true
         return image
     }()
@@ -23,6 +23,7 @@ final class CollectionViewCellTableView: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor(named: "backgroundColor")
         setupLayout()
     }
 
@@ -30,8 +31,7 @@ final class CollectionViewCellTableView: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Public Methods
-    // Функция отвечает за показ фото
+    // MARK: - SetupImageModel
     func setupImageModel(_ image: PhotoGallery) {
         imagePhoto.image = UIImage(named: image.image)
     }
@@ -42,9 +42,9 @@ final class CollectionViewCellTableView: UICollectionViewCell {
         contentView.addSubview(imagePhoto)
 
         NSLayoutConstraint.activate([
-            imagePhoto.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imagePhoto.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
             imagePhoto.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imagePhoto.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            imagePhoto.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
             imagePhoto.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }

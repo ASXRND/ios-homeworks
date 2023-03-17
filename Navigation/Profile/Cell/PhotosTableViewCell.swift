@@ -28,13 +28,12 @@ final class PhotosTableViewCell: UITableViewCell {
         layoutCollection.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero ,collectionViewLayout: layoutCollection)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = UIColor(named: "backgroundColor")
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(CollectionViewCellTableView.self, forCellWithReuseIdentifier: CollectionViewCellTableView.identifier)
         return collectionView
     }()
-
-
 
     //MARK: - Add Label
     private lazy var photosLabel: UILabel = {
@@ -51,6 +50,7 @@ final class PhotosTableViewCell: UITableViewCell {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.tintColor = UIColor(named: "tintButtonColor")
         button.addTarget(self, action: #selector(galleryButtonAction), for: .touchUpInside)
         return button
     }()
@@ -75,13 +75,6 @@ final class PhotosTableViewCell: UITableViewCell {
         contentView.addSubview(photosLabel)
         contentView.addSubview(arrowButton)
 
-
-//        let inset: CGFloat = 13
-//        let insetImage: CGFloat = 8
-//        let screenWidth = UIScreen.main.bounds.width
-//        let imageWidth = (screenWidth - 48) / 4
-//        let imageHeight = imageWidth / 4 * 3
-
         NSLayoutConstraint.activate([
 
             photosLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
@@ -89,14 +82,14 @@ final class PhotosTableViewCell: UITableViewCell {
 
             arrowButton.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
             arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            arrowButton.widthAnchor.constraint(equalToConstant: 50),
+            arrowButton.heightAnchor.constraint(equalToConstant: 50),
 
             collectionView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: 12),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12 - 8),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12 + 8),
             collectionView.heightAnchor.constraint(equalToConstant: 100),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-
-
         ])
     }
 }
@@ -109,6 +102,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellTableView.identifier, for: indexPath) as? CollectionViewCellTableView else { return CollectionViewCellTableView() }
         let photoGallery = photoGallery[indexPath.item]
+        cell.backgroundColor = UIColor(named: "BackgroundColor")
         cell.setupImageModel(photoGallery)
         return cell
     }
@@ -129,7 +123,7 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: sideInset, bottom: sideInset, right: sideInset)
+        UIEdgeInsets(top: 1, left: sideInset, bottom: 1, right: sideInset)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -29,7 +29,7 @@ final class DetailedViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(named: "labelColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -58,7 +58,7 @@ final class DetailedViewController: UIViewController {
     lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
+        label.textColor = UIColor(named: "labelColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isUserInteractionEnabled = true
         return label
@@ -68,7 +68,7 @@ final class DetailedViewController: UIViewController {
     lazy var viewsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
+        label.textColor = UIColor(named: "labelColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

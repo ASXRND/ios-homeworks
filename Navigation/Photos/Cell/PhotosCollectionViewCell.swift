@@ -23,6 +23,7 @@ final class CollectionViewCell: UICollectionViewCell {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
+        image.layer.cornerRadius = 5
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()

@@ -44,7 +44,7 @@ final class LogInViewController: UIViewController {
             animation.toValue = NSValue(cgPoint: CGPoint(x: loginView.stackView.center.x + 10, y: loginView.stackView.center.y))
             loginView.stackView.layer.add(animation, forKey: "position")
             loginView.emailTextFild.attributedPlaceholder = NSAttributedString(string:
-                                                                                loginView.passwordTextFild.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                                                                                loginView.emailTextFild.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
             loginView.passwordTextFild.attributedPlaceholder =
             NSAttributedString(string: loginView.passwordTextFild.placeholder ?? "",
                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
@@ -72,8 +72,10 @@ final class LogInViewController: UIViewController {
             navigationController?.pushViewController(profileVC, animated: true)
 
         } else if loginView.emailTextFild.text != "" && loginView.passwordTextFild.text != ""  {
-            let alert = UIAlertController(title: "Неверные данные", message: "Вы ввели неверный логин или пароль, попробуйте снова", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Попробовать еще раз", style: .default)
+            let alert = UIAlertController(title: "Что-то пошло не так!", message: "Вы ввели неверный логин или пароль.", preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: "Попробовать еще раз.", style: .default)
+
             alert.addAction(okAction)
             present(alert, animated: true)
         }

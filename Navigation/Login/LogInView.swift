@@ -66,6 +66,7 @@ final class LogInView: UIView {
         textFild.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         textFild.textColor = UIColor(named: "labelColor")
         textFild.font = .systemFont(ofSize: 16)
+        textFild.clearButtonMode = .whileEditing
         textFild.backgroundColor = UIColor(named: "backgroundColor")
         textFild.placeholder = "Email of phone"
         textFild.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFild.frame.height))
@@ -84,6 +85,7 @@ final class LogInView: UIView {
         textFild.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         textFild.textColor = UIColor(named: "labelColor")
         textFild.font = .systemFont(ofSize: 16)
+        textFild.clearButtonMode = .whileEditing
         textFild.backgroundColor = UIColor(named: "backgroundColor")
         textFild.placeholder = "Password"
         textFild.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFild.frame.height))

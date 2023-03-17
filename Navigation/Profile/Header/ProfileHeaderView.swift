@@ -53,6 +53,7 @@ final class ProfileHeaderView: UIView {
         textFild.layer.cornerRadius = 12
         textFild.font = .systemFont(ofSize: 15, weight: .regular)
         textFild.textAlignment = .center
+        textFild.clearButtonMode = .whileEditing
         textFild.layer.borderWidth = 1
         textFild.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
         textFild.delegate = self
@@ -65,16 +66,16 @@ final class ProfileHeaderView: UIView {
     private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.setTitle("Show status", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0, green: 0.5695073605, blue: 1, alpha: 1)
-        button.tintColor = .white
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        button.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowOffset = CGSizeMake(4.0, 4.0)
+        button.backgroundColor = UIColor(named: "buttonBackgroundColor")
+        button.setTitleColor(UIColor(named: "tintButtonColorHeader"), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        button.layer.shadowColor = UIColor(named: "shadowColor")?.cgColor
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowOffset = CGSizeMake(0.0, 4.0)
         button.layer.cornerRadius = 14
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isEnabled = false
-        button.addTarget(self, action: #selector(avatarButtomAction), for: .touchDown)
+        button.addTarget(self, action: #selector(avatarButtomAction), for: .touchUpInside)
         return button
     }()
 
@@ -82,7 +83,7 @@ final class ProfileHeaderView: UIView {
         let crossButton = UIButton()
         crossButton.translatesAutoresizingMaskIntoConstraints = false
         crossButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        crossButton.tintColor = .systemGray4
+        crossButton.tintColor = #colorLiteral(red: 0, green: 0.5695073605, blue: 1, alpha: 1)
         crossButton.alpha = 0
         crossButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         return crossButton
@@ -194,7 +195,7 @@ final class ProfileHeaderView: UIView {
         bringSubviewToFront(avatarImage)
 
         NSLayoutConstraint.activate([
-            crossButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            crossButton.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             crossButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             crossButton.widthAnchor.constraint(equalToConstant: 30),
             crossButton.heightAnchor.constraint(equalToConstant: 30)
@@ -202,7 +203,7 @@ final class ProfileHeaderView: UIView {
 
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             self.blackView.alpha = 0.8
-            self.avatarImage.layer.cornerRadius = 0
+            self.avatarImage.layer.cornerRadius = 10
             self.topImage.constant = 100
             self.leadingImage.constant = 0
             self.widthImage.constant = UIScreen.main.bounds.width

@@ -37,7 +37,7 @@ final class PhotosViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .systemGray4
+        button.tintColor = #colorLiteral(red: 0, green: 0.5695073605, blue: 1, alpha: 1)
         button.alpha = 0
         button.addTarget(self, action: #selector(cancelAnimationButton), for: .touchUpInside)
         return button
@@ -87,10 +87,10 @@ final class PhotosViewController: UIViewController {
             fullImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
             fullImageView.heightAnchor.constraint(equalTo: fullImageView.widthAnchor, multiplier: 1),
 
-            buttonCancelAnimation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            buttonCancelAnimation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             buttonCancelAnimation.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8),
-            buttonCancelAnimation.widthAnchor.constraint(equalToConstant: 40),
-            buttonCancelAnimation.heightAnchor.constraint(equalTo: buttonCancelAnimation.widthAnchor, multiplier: 1)
+            buttonCancelAnimation.widthAnchor.constraint(equalToConstant: 80),
+            buttonCancelAnimation.heightAnchor.constraint(equalToConstant: 80),
 
         ])
     }
@@ -165,6 +165,7 @@ extension PhotosViewController: PhotoCellDelegate {
                        options: .curveEaseInOut) {
 
             self.blackView.layer.opacity = 0.8
+            self.fullImageView.layer.cornerRadius = 10
             self.fullImageView.layer.opacity = 1
             self.view.layoutIfNeeded()
 

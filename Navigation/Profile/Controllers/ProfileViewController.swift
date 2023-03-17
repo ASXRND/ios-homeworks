@@ -19,6 +19,7 @@ final class ProfileViewController: UIViewController {
         tableView.sectionHeaderTopPadding = .zero
         tableView.sectionHeaderHeight = .zero
         tableView.sectionFooterHeight = .zero
+        tableView.backgroundColor = UIColor(named: "backgroundColor")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -64,7 +65,7 @@ extension ProfileViewController: UITableViewDataSource {
         case 0:
             let cell: PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
             cell.delegate = self
-            cell.layer.shadowColor = #colorLiteral(red: 0.2196078449, green: 0.5868554688, blue: 0.8549019694, alpha: 1).cgColor
+            cell.layer.shadowColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1).cgColor
             cell.layer.shadowOpacity = 0.7
             cell.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
             return cell
