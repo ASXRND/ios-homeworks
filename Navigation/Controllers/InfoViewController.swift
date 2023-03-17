@@ -45,7 +45,7 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.4862745098, green: 0.4117647059, blue: 0.5019607843, alpha: 1)
+        view.backgroundColor = UIColor(named: "backgroundColor")
         setupViews()
         setupConstraints()
     }

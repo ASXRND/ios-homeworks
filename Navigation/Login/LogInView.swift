@@ -19,7 +19,7 @@ final class LogInView: UIView {
     //MARK: - Content View
     private lazy var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "backgroundColor")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -64,9 +64,9 @@ final class LogInView: UIView {
         textFild.layer.borderWidth = 0.5
         textFild.layer.cornerRadius = 10
         textFild.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        textFild.textColor = .black
+        textFild.textColor = UIColor(named: "labelColor")
         textFild.font = .systemFont(ofSize: 16)
-        textFild.backgroundColor = #colorLiteral(red: 0.9594197869, green: 0.9599153399, blue: 0.975127399, alpha: 1)
+        textFild.backgroundColor = UIColor(named: "backgroundColor")
         textFild.placeholder = "Email of phone"
         textFild.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFild.frame.height))
         textFild.leftViewMode = .always
@@ -82,9 +82,9 @@ final class LogInView: UIView {
         textFild.layer.borderWidth = 0.5
         textFild.layer.cornerRadius = 10
         textFild.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        textFild.textColor = .black
+        textFild.textColor = UIColor(named: "labelColor")
         textFild.font = .systemFont(ofSize: 16)
-        textFild.backgroundColor = #colorLiteral(red: 0.9594197869, green: 0.9599153399, blue: 0.975127399, alpha: 1)
+        textFild.backgroundColor = UIColor(named: "backgroundColor")
         textFild.placeholder = "Password"
         textFild.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFild.frame.height))
         textFild.leftViewMode = .always
@@ -108,7 +108,7 @@ final class LogInView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "backgroundColor")
         setupView()
         setupConstraints()
         addTap()

@@ -57,7 +57,7 @@ final class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.768627451, green: 0.4666666667, blue: 0.3960784314, alpha: 1)
+        view.backgroundColor = UIColor(named: "backgroundColor")
         title = "Feed"
         setupView()
         setupConstraints()

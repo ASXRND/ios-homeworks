@@ -10,6 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController {
 
     private var modelStar: [[Any]] = [["Photos"], Modelstar.starArray()]
+    private let postTableViewCell = PostTableViewCell()
 
     //MARK: - Add Table View
     private lazy var myTableView: UITableView = {
@@ -29,7 +30,7 @@ final class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "backgroundColor")
         setupLayoutConstraints()
     }
 
@@ -62,7 +63,7 @@ extension ProfileViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell: PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-            cell.galleryButton.addTarget(self, action: #selector(galleryButtonAction), for: .touchUpInside)
+            cell.delegate = self
             cell.layer.shadowColor = #colorLiteral(red: 0.2196078449, green: 0.5868554688, blue: 0.8549019694, alpha: 1).cgColor
             cell.layer.shadowOpacity = 0.7
             cell.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
@@ -75,12 +76,6 @@ extension ProfileViewController: UITableViewDataSource {
                 return cell
             } else { return UITableViewCell() }
         }
-    }
-
-    //MARK: - Gallery Button Action
-    @objc private func galleryButtonAction() {
-        let photosVC = PhotosViewController()
-        navigationController?.pushViewController(photosVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -109,10 +104,10 @@ extension ProfileViewController: UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let model: Modelstar = modelStar[indexPath.section][indexPath.row] as? Modelstar {
             let detailVC = DetailedViewController()
+
             detailVC.viewsLabel.text = "Views: \(model.views)"
             detailVC.likesLabel.text = "Likes: \(model.likes)"
             detailVC.detailedImageView.image = UIImage(named: model.image)
@@ -123,13 +118,10 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
+//MARK: - Gallery Button Action
+extension ProfileViewController: PhotosTableViewCellDelegate {
+    @objc internal func galleryButtonAction() {
+        let photosVC = PhotosViewController()
+        navigationController?.pushViewController(photosVC, animated: true)
+    }
+}

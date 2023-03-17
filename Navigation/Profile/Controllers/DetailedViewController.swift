@@ -48,7 +48,7 @@ final class DetailedViewController: UIViewController {
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .black
+        label.textColor = UIColor(named: "descriptionColor")
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -76,7 +76,7 @@ final class DetailedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayoutConstraints()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "backgroundColor")
 
         title = "Description"
         navigationController?.setNavigationBarHidden(false, animated: true)

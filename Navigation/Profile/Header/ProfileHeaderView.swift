@@ -28,7 +28,7 @@ final class ProfileHeaderView: UIView {
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hipster Minions"
-        label.textColor = .black
+        label.textColor = UIColor(named: "labelColor")
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -47,8 +47,8 @@ final class ProfileHeaderView: UIView {
     //MARK: - Add Text Field
     private lazy var statusTextField: UITextField = {
         let textFild = UITextField()
-        textFild.backgroundColor = #colorLiteral(red: 0.9561659694, green: 0.9591339231, blue: 0.9530903697, alpha: 1)
-        textFild.textColor = .black
+        textFild.backgroundColor = UIColor(named: "backgroundColor")
+        textFild.textColor = UIColor(named: "labelColor")
         textFild.placeholder = "Enter new status"
         textFild.layer.cornerRadius = 12
         textFild.font = .systemFont(ofSize: 15, weight: .regular)
@@ -100,7 +100,7 @@ final class ProfileHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "backgroundColor")
         setupLayoutConstraints()
         setupGesture()
         addTap()

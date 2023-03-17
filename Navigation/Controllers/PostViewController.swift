@@ -24,7 +24,7 @@ final class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.5803921569, blue: 0.3254901961, alpha: 1)
+        view.backgroundColor = UIColor(named: "backgroundColor")
         barBattonItem()
     }
     

@@ -7,72 +7,52 @@
 
 import UIKit
 
+// MARK: - Protocol PhotosTableViewCellDelegate
+
+protocol PhotosTableViewCellDelegate: AnyObject {
+    func galleryButtonAction()
+}
+
 final class PhotosTableViewCell: UITableViewCell {
 
+    // MARK: - Public Properties
+
+    weak var delegate: PhotosTableViewCellDelegate?
+    // MARK: - Private Properties
+
+    private let photoGallery = PhotoGallery.setupImage()
+
+    // Создаю TableViewCollection для фото на странице TableView в профиле
+    private lazy var collectionView: UICollectionView = {
+        let layoutCollection = UICollectionViewFlowLayout()
+        layoutCollection.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero ,collectionViewLayout: layoutCollection)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(CollectionViewCellTableView.self, forCellWithReuseIdentifier: CollectionViewCellTableView.identifier)
+        return collectionView
+    }()
+
+
+
     //MARK: - Add Label
-    let photosLabel: UILabel = {
+    private lazy var photosLabel: UILabel = {
         let label = UILabel()
         label.text = "Photos"
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(named: "labelColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     //MARK: - Add Button
-    var arrowButton: UIButton = {
+    private lazy var arrowButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.addTarget(self, action: #selector(galleryButtonAction), for: .touchUpInside)
         return button
-    }()
-
-    //MARK: - Add Action Button
-    var galleryButton: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    //MARK: - Add Image View
-    let imageView_1: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Amber Laura Heard")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 6
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    let imageView_2: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Anastasia Alekseevna Terekhova")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 6
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    let imageView_3: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Anna Vyalitsyna")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 6
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    let imageView_4: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Avril Ramona Lavigne")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 6
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
     }()
 
     //MARK: -
@@ -85,58 +65,75 @@ final class PhotosTableViewCell: UITableViewCell {
         fatalError()
     }
 
+    @objc private func galleryButtonAction() {
+        delegate?.galleryButtonAction()
+    }
+
     //MARK: - Setup Layout Constraints
     private func setupLayoutConstraints() {
+        contentView.addSubview(collectionView)
         contentView.addSubview(photosLabel)
         contentView.addSubview(arrowButton)
-        contentView.addSubview(galleryButton)
-        contentView.addSubview(imageView_1)
-        contentView.addSubview(imageView_2)
-        contentView.addSubview(imageView_3)
-        contentView.addSubview(imageView_4)
 
-        let inset: CGFloat = 13
-        let insetImage: CGFloat = 8
-        let screenWidth = UIScreen.main.bounds.width
-        let imageWidth = (screenWidth - 48) / 4
-        let imageHeight = imageWidth / 4 * 3
+
+//        let inset: CGFloat = 13
+//        let insetImage: CGFloat = 8
+//        let screenWidth = UIScreen.main.bounds.width
+//        let imageWidth = (screenWidth - 48) / 4
+//        let imageHeight = imageWidth / 4 * 3
 
         NSLayoutConstraint.activate([
-            photosLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            photosLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            photosLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor),
+
+            photosLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            photosLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
 
             arrowButton.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
-            arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
 
-            galleryButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            galleryButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            galleryButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            galleryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: 12),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12 - 8),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12 + 8),
+            collectionView.heightAnchor.constraint(equalToConstant: 100),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
 
-            imageView_1.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: inset),
-            imageView_1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            imageView_1.widthAnchor.constraint(equalToConstant: imageWidth),
-            imageView_1.heightAnchor.constraint(equalToConstant: imageHeight),
-            imageView_1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
 
-            imageView_2.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: inset),
-            imageView_2.leadingAnchor.constraint(equalTo: imageView_1.trailingAnchor, constant: insetImage),
-            imageView_2.widthAnchor.constraint(equalToConstant: imageWidth),
-            imageView_2.heightAnchor.constraint(equalToConstant: imageHeight),
-            imageView_2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
-
-            imageView_3.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: inset),
-            imageView_3.leadingAnchor.constraint(equalTo: imageView_2.trailingAnchor, constant: insetImage),
-            imageView_3.widthAnchor.constraint(equalToConstant: imageWidth),
-            imageView_3.heightAnchor.constraint(equalToConstant: imageHeight),
-            imageView_3.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
-
-            imageView_4.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: inset),
-            imageView_4.leadingAnchor.constraint(equalTo: imageView_3.trailingAnchor, constant: insetImage),
-            imageView_4.widthAnchor.constraint(equalToConstant: imageWidth),
-            imageView_4.heightAnchor.constraint(equalToConstant: imageHeight),
-            imageView_4.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
         ])
     }
 }
+// MARK: UICollectionViewDataSource
+extension PhotosTableViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photoGallery.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellTableView.identifier, for: indexPath) as? CollectionViewCellTableView else { return CollectionViewCellTableView() }
+        let photoGallery = photoGallery[indexPath.item]
+        cell.setupImageModel(photoGallery)
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
+    var sideInset: CGFloat { return 8 }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = (collectionView.bounds.width - sideInset * 3) / 4
+        return CGSize(width: height, height: height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sideInset
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: sideInset, bottom: sideInset, right: sideInset)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return sideInset
+    }
+}
+
