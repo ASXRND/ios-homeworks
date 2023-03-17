@@ -9,12 +9,12 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
-    private var statusText: String = ""
+    private var statusText: String?
 
     //MARK: - Add Avatar Image
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "ava")
+        image.image = UIImage(named: "myAva")
         image.layer.cornerRadius = 50
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
@@ -27,7 +27,7 @@ final class ProfileHeaderView: UIView {
     //MARK: - Add Title Label
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hipster Minions"
+        label.text = "Спасибо за знания!"
         label.textColor = UIColor(named: "labelColor")
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,8 +37,8 @@ final class ProfileHeaderView: UIView {
     //MARK: - Add Status Label
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Waiting for something"
-        label.textColor = .gray
+        label.text = "С вами было увлекательно!"
+        label.textColor = UIColor(named: "statusLabelColor")
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -55,7 +55,7 @@ final class ProfileHeaderView: UIView {
         textFild.textAlignment = .center
         textFild.clearButtonMode = .whileEditing
         textFild.layer.borderWidth = 1
-        textFild.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        textFild.layer.borderColor = UIColor(named: "borderstatusTextField")?.cgColor
         textFild.delegate = self
         textFild.translatesAutoresizingMaskIntoConstraints = false
         textFild.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
@@ -74,7 +74,7 @@ final class ProfileHeaderView: UIView {
         button.layer.shadowOffset = CGSizeMake(0.0, 4.0)
         button.layer.cornerRadius = 14
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.isEnabled = false
+        button.isEnabled = true
         button.addTarget(self, action: #selector(avatarButtomAction), for: .touchUpInside)
         return button
     }()
@@ -113,14 +113,21 @@ final class ProfileHeaderView: UIView {
 
     //MARK: - Action Avatar Buttom
     @objc private func avatarButtomAction(selector: UIButton) {
-        statusLabel.text = statusText
+        if statusTextField.text == "" {
+            statusTextField.attributedPlaceholder = NSAttributedString(string: "Cannot be empty...",
+                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+
+        } else if statusTextField.text != "" {
+            statusTextField.attributedPlaceholder = NSAttributedString(string: "Set your status...",
+                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+            statusLabel.text = statusTextField.text
+        }
     }
+
 
     //MARK: - Action Text Field
     @objc private func textFieldAction(_ textField:  UITextField) {
-        if textField.text?.isEmpty != nil {
-            statusText = textField.text!
-        }
+        statusText = statusLabel.text ?? ""
     }
 
     //MARK: - Remove Keyboard
@@ -158,9 +165,9 @@ final class ProfileHeaderView: UIView {
 
             topImage, leadingImage, widthImage, heightImage,
 
-            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 130),
-            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 130),
+            fullNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             fullNameLabel.heightAnchor.constraint(equalToConstant: 20),
 
             statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 30),
@@ -174,10 +181,10 @@ final class ProfileHeaderView: UIView {
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
 
             setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: inset),
-            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
+            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             setStatusButton.heightAnchor.constraint(equalToConstant: 43),
-            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
 
         ])
     }
@@ -237,10 +244,10 @@ final class ProfileHeaderView: UIView {
 
 //MARK: - Blocking Set Status Button if there is no text
 extension ProfileHeaderView: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        setStatusButton.isEnabled = !text.isEmpty
-    }
+    //    func textFieldDidChangeSelection(_ textField: UITextField) {
+    //        guard let text = textField.text else { return }
+    //        setStatusButton.isEnabled = !text.isEmpty
+    //    }
 
     //MARK: - Remove The Keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
