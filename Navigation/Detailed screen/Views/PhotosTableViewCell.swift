@@ -8,21 +8,16 @@
 import UIKit
 
 // MARK: - Protocol PhotosTableViewCellDelegate
-
 protocol PhotosTableViewCellDelegate: AnyObject {
     func galleryButtonAction()
 }
 
 final class PhotosTableViewCell: UITableViewCell {
 
-    // MARK: - Public Properties
-
     weak var delegate: PhotosTableViewCellDelegate?
-    // MARK: - Private Properties
-
     private let photoGallery = PhotoGallery.setupImage()
 
-    // Создаю TableViewCollection для фото на странице TableView в профиле
+    // MARK: - CollectionView Horizontal
     private lazy var collectionView: UICollectionView = {
         let layoutCollection = UICollectionViewFlowLayout()
         layoutCollection.scrollDirection = .horizontal
@@ -35,7 +30,7 @@ final class PhotosTableViewCell: UITableViewCell {
         return collectionView
     }()
 
-    //MARK: - Add Label
+    //MARK: - Add PhotosLabel
     private lazy var photosLabel: UILabel = {
         let label = UILabel()
         label.text = "Photos"
@@ -45,7 +40,7 @@ final class PhotosTableViewCell: UITableViewCell {
         return label
     }()
 
-    //MARK: - Add Button
+    //MARK: - Add ArrowButton
     private lazy var arrowButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +50,6 @@ final class PhotosTableViewCell: UITableViewCell {
         return button
     }()
 
-    //MARK: -
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayoutConstraints()
@@ -65,12 +59,14 @@ final class PhotosTableViewCell: UITableViewCell {
         fatalError()
     }
 
+    //MARK: - GalleryButtonAction
     @objc private func galleryButtonAction() {
         delegate?.galleryButtonAction()
     }
 
     //MARK: - Setup Layout Constraints
     private func setupLayoutConstraints() {
+
         contentView.addSubview(collectionView)
         contentView.addSubview(photosLabel)
         contentView.addSubview(arrowButton)
@@ -93,7 +89,8 @@ final class PhotosTableViewCell: UITableViewCell {
         ])
     }
 }
-// MARK: UICollectionViewDataSource
+
+// MARK: - Extension UICollectionViewDataSource
 extension PhotosTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoGallery.count
@@ -108,8 +105,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-
+// MARK: - Extension UICollectionViewDelegateFlowLayout
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     var sideInset: CGFloat { return 8 }
 

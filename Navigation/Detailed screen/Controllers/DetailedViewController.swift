@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailedViewController: UIViewController {
     
-    let screenWidth = UIScreen.main.bounds.width
+    private let screenWidth = UIScreen.main.bounds.width
 
     //MARK: - Add Scroll View
     private  lazy var scrollView: UIScrollView = {
@@ -35,7 +35,7 @@ final class DetailedViewController: UIViewController {
     }()
 
     //MARK: - Add DetailedImageView
-     lazy var detailedImageView: UIImageView = {
+    lazy var detailedImageView: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .white
         image.contentMode = .scaleAspectFill
@@ -92,7 +92,7 @@ final class DetailedViewController: UIViewController {
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(likesLabel)
         contentView.addSubview(viewsLabel)
-
+        
         NSLayoutConstraint.activate([
 
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

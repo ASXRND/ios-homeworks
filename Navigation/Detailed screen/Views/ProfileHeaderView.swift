@@ -10,6 +10,7 @@ import UIKit
 final class ProfileHeaderView: UIView {
 
     private var statusText: String?
+    private let inset: CGFloat = 16
 
     //MARK: - Add Avatar Image
     private lazy var avatarImage: UIImageView = {
@@ -79,6 +80,7 @@ final class ProfileHeaderView: UIView {
         return button
     }()
 
+    //MARK: - Add CrossButton for animation
     private lazy var crossButton: UIButton = {
         let crossButton = UIButton()
         crossButton.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +91,7 @@ final class ProfileHeaderView: UIView {
         return crossButton
     }()
 
+    //MARK: - Add BlackView for animation
     private let blackView: UIView = {
         let viewBlack = UIView()
         viewBlack.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +105,7 @@ final class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(named: "backgroundColor")
-        setupLayoutConstraints()
+        setupLayout()
         setupGesture()
         addTap()
     }
@@ -124,7 +127,6 @@ final class ProfileHeaderView: UIView {
         }
     }
 
-
     //MARK: - Action Text Field
     @objc private func textFieldAction(_ textField:  UITextField) {
         statusText = statusLabel.text ?? ""
@@ -136,25 +138,26 @@ final class ProfileHeaderView: UIView {
         addGestureRecognizer(tap)
 
     }
+
     //MARK: - Action Remove Keyboard
     @objc private func hideKeyboard() {
         endEditing(true)
     }
 
+    //MARK: - Add Constraints for animation
     private var topImage = NSLayoutConstraint()
     private var leadingImage = NSLayoutConstraint()
     private var widthImage = NSLayoutConstraint()
     private var heightImage = NSLayoutConstraint()
 
-    //MARK: - Setup Layout Constraints
-    private func setupLayoutConstraints() {
+    //MARK: - Setup Layout
+    private func setupLayout() {
+
         addSubview(avatarImage)
         addSubview(setStatusButton)
         addSubview(fullNameLabel)
         addSubview(statusLabel)
         addSubview(statusTextField)
-
-        let inset: CGFloat = 16
 
         topImage = avatarImage.topAnchor.constraint(equalTo: topAnchor, constant: 20)
         leadingImage = avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset)
@@ -189,14 +192,16 @@ final class ProfileHeaderView: UIView {
         ])
     }
 
-
+    //MARK: - SetupGesture for animation
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionTap))
         avatarImage.isUserInteractionEnabled = true
         avatarImage.addGestureRecognizer(tapGesture)
     }
 
+    //MARK: - Action Tap for animation
     @objc private func actionTap() {
+
         addSubview(blackView)
         addSubview(crossButton)
         bringSubviewToFront(avatarImage)
@@ -224,6 +229,7 @@ final class ProfileHeaderView: UIView {
         }
     }
 
+    //MARK: - CancelAction Animation
     @objc private func cancelAction() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
             self.crossButton.alpha = 0

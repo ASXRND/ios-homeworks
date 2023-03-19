@@ -8,10 +8,9 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-
+    
     private var modelStar: [[Any]] = [["Photos"], Modelstar.starArray()]
-    private let postTableViewCell = PostTableViewCell()
-
+    
     //MARK: - Add Table View
     private lazy var myTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -28,19 +27,19 @@ final class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "backgroundColor")
         setupLayoutConstraints()
     }
-
+    
     //MARK: - Setup Layout Constraints
     private func setupLayoutConstraints() {
         view.addSubview(myTableView)
-
+        
         NSLayoutConstraint.activate([
-
+            
             myTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -51,15 +50,15 @@ final class ProfileViewController: UIViewController {
 
 //MARK: - Extension UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return modelStar.count
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         modelStar[section].count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -69,7 +68,7 @@ extension ProfileViewController: UITableViewDataSource {
             cell.layer.shadowOpacity = 0.7
             cell.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
             return cell
-
+            
         default:
             if let model: Modelstar = modelStar[indexPath.section][indexPath.row] as? Modelstar {
                 let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
@@ -78,15 +77,15 @@ extension ProfileViewController: UITableViewDataSource {
             } else { return UITableViewCell() }
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return section == 0 ? ProfileHeaderView() : nil
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -94,21 +93,22 @@ extension ProfileViewController: UITableViewDataSource {
 
 //MARK: - Extension UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 1
     }
-
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if indexPath.section == 1 && editingStyle == .delete {
             modelStar[indexPath.section].remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let model: Modelstar = modelStar[indexPath.section][indexPath.row] as? Modelstar {
+        if var model: Modelstar = modelStar[indexPath.section][indexPath.row] as? Modelstar {
             let detailVC = DetailedViewController()
-
+            model.views += 1
             detailVC.viewsLabel.text = "Views: \(model.views)"
             detailVC.likesLabel.text = "Likes: \(model.likes)"
             detailVC.detailedImageView.image = UIImage(named: model.image)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+final class InfoViewController: UIViewController {
     
     //MARK: - Add Post Button
     private lazy var postButton: CradientButton = {
@@ -64,7 +64,6 @@ class InfoViewController: UIViewController {
             postButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -300),
             postButton.widthAnchor.constraint(equalToConstant: 200),
             postButton.heightAnchor.constraint(equalToConstant: 40)
-            
         ])
     }
 }

@@ -8,9 +8,9 @@
 import UIKit
 
 final class CollectionViewCellTableView: UICollectionViewCell {
-    // MARK: - Private Properties
 
-    private let imagePhoto: UIImageView = {
+    // MARK: - Add ImageView
+    private lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
@@ -18,8 +18,6 @@ final class CollectionViewCellTableView: UICollectionViewCell {
         image.clipsToBounds = true
         return image
     }()
-
-    // MARK: - Override Methods
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,19 +31,18 @@ final class CollectionViewCellTableView: UICollectionViewCell {
 
     // MARK: - SetupImageModel
     func setupImageModel(_ image: PhotoGallery) {
-        imagePhoto.image = UIImage(named: image.image)
+        imageView.image = UIImage(named: image.image)
     }
 
-    // MARK: - Private Methods
-
+    // MARK: - SetupLayout
     private func setupLayout() {
-        contentView.addSubview(imagePhoto)
+        contentView.addSubview(imageView)
 
         NSLayoutConstraint.activate([
-            imagePhoto.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
-            imagePhoto.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imagePhoto.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
-            imagePhoto.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }

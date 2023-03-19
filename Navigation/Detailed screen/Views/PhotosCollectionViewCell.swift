@@ -8,7 +8,6 @@
 import UIKit
 
 // MARK: - Protocol PhotoCellDelegate
-
 protocol PhotoCellDelegate: AnyObject {
     func tapAction(photo: UIImage)
     func cancelAnimationButton()
@@ -19,7 +18,7 @@ final class CollectionViewCell: UICollectionViewCell {
     weak var buttonAllPhotoCellDelegate: PhotoCellDelegate?
 
     //MARK: - Add Image View
-    var collectionImageView: UIImageView = {
+    lazy var collectionImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
@@ -30,7 +29,7 @@ final class CollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayoutConstraints()
+        setupLayout()
         setupGestures()
     }
 
@@ -38,20 +37,20 @@ final class CollectionViewCell: UICollectionViewCell {
         fatalError()
     }
 
-    // MARK: - Private Methods
-
+    // MARK: - SetupGestures
     private func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoAction))
         collectionImageView.isUserInteractionEnabled = true
         collectionImageView.addGestureRecognizer(tapGesture)
     }
 
+    // MARK: - PhotoAction
     @objc private func photoAction() {
         buttonAllPhotoCellDelegate?.tapAction(photo: collectionImageView.image!)
     }
 
-    //MARK: - Setup Layout Constraints
-    private func setupLayoutConstraints() {
+    //MARK: - Setup Layout
+    private func setupLayout() {
         contentView.addSubview(collectionImageView)
 
         NSLayoutConstraint.activate ([

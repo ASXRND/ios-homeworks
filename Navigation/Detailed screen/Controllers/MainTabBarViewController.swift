@@ -19,7 +19,7 @@ final class MainTabBarViewController: UITabBarController {
         tabBar.backgroundColor = UIColor(named: "backgroundColor")
     }
     
-    //MARK: - Creation VC
+    //MARK: - Creation NC
     private func generateTabBar() {
         viewControllers = [
             createNavController(vc: logInViewController, itemName: "logIn", itemImage: "personalhotspot"),
