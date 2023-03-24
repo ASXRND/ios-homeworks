@@ -21,7 +21,6 @@
 		1E179075298D26DB00823C2B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E179074298D26DB00823C2B /* Post.swift */; };
 		1EA0D7EB29A9FE3500B5C349 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0D7EA29A9FE3500B5C349 /* PhotosTableViewCell.swift */; };
 		1EC672CE299E303500FDDECD /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672CD299E303500FDDECD /* LogInViewController.swift */; };
-		1EC672D1299E47D900FDDECD /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672D0299E47D900FDDECD /* LogInView.swift */; };
 		1EC672D5299FCC2B00FDDECD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672D4299FCC2B00FDDECD /* PostTableViewCell.swift */; };
 		1EC672D9299FD4C800FDDECD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC672D8299FD4C800FDDECD /* UIView+Extension.swift */; };
 		1ECAB12B29AA43B400070F5C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECAB12A29AA43B400070F5C /* PhotosViewController.swift */; };
@@ -50,7 +49,6 @@
 		1E179074298D26DB00823C2B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1EA0D7EA29A9FE3500B5C349 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		1EC672CD299E303500FDDECD /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		1EC672D0299E47D900FDDECD /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		1EC672D4299FCC2B00FDDECD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		1EC672D8299FD4C800FDDECD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		1ECAB12A29AA43B400070F5C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -142,26 +140,9 @@
 		1EDAB5DE29C7164C006B0A85 /* Main screen */ = {
 			isa = PBXGroup;
 			children = (
-				1EDAB5E029C71695006B0A85 /* Controllers */,
-				1EDAB5DF29C71677006B0A85 /* Views */,
-			);
-			path = "Main screen";
-			sourceTree = "<group>";
-		};
-		1EDAB5DF29C71677006B0A85 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				1EC672D0299E47D900FDDECD /* LogInView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		1EDAB5E029C71695006B0A85 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
 				1EC672CD299E303500FDDECD /* LogInViewController.swift */,
 			);
-			path = Controllers;
+			path = "Main screen";
 			sourceTree = "<group>";
 		};
 		1EDAB5E129C7172C006B0A85 /* Detailed screen */ = {
@@ -292,7 +273,6 @@
 				1E17906B298C363E00823C2B /* FeedViewController.swift in Sources */,
 				1E17904E298C1DB800823C2B /* SceneDelegate.swift in Sources */,
 				1ECAB12D29AA43EB00070F5C /* PhotosCollectionViewCell.swift in Sources */,
-				1EC672D1299E47D900FDDECD /* LogInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

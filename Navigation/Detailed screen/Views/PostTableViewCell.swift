@@ -115,7 +115,6 @@ final class PostTableViewCell: UITableViewCell {
             
             authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
             authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             
             myImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: inset),
             myImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

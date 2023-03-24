@@ -15,7 +15,7 @@ final class ProfileHeaderView: UIView {
     //MARK: - Add Avatar Image
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "myAva")
+        image.image = UIImage(named: "ava")
         image.layer.cornerRadius = 50
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
