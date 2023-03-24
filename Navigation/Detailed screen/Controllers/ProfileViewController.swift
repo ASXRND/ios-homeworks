@@ -17,6 +17,7 @@ final class ProfileViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .black
+        tableView.separatorInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         tableView.sectionHeaderTopPadding = .zero
         tableView.sectionHeaderHeight = .zero
         tableView.sectionFooterHeight = .zero
