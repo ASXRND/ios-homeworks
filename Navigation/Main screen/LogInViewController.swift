@@ -63,7 +63,7 @@ final class LogInViewController: UIViewController {
         textFild.font = .systemFont(ofSize: 16)
         textFild.clearButtonMode = .whileEditing
         textFild.backgroundColor = UIColor(named: "textFildBackgroundColor")
-        textFild.placeholder = "Email of phone"
+        textFild.placeholder = "Введите Email"
         textFild.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFild.frame.height))
         textFild.leftViewMode = .always
         textFild.autocapitalizationType = .none
@@ -82,7 +82,7 @@ final class LogInViewController: UIViewController {
         textFild.font = .systemFont(ofSize: 16)
         textFild.clearButtonMode = .whileEditing
         textFild.backgroundColor = UIColor(named: "textFildBackgroundColor")
-        textFild.placeholder = "Password"
+        textFild.placeholder = "Введите Password"
         textFild.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFild.frame.height))
         textFild.leftViewMode = .always
         textFild.autocapitalizationType = .none
@@ -108,7 +108,7 @@ final class LogInViewController: UIViewController {
     private lazy var alertLabel: UILabel = {
         let labelAlert = UILabel()
         labelAlert.translatesAutoresizingMaskIntoConstraints = false
-        labelAlert.text = "Password cannot be less than 8 characters"
+        labelAlert.text = "Password должен содержать не менее 8 символов"
         labelAlert.textColor = .red
         labelAlert.isHidden = true
         labelAlert.font = UIFont.systemFont(ofSize: 12, weight: .medium)
@@ -129,8 +129,8 @@ final class LogInViewController: UIViewController {
     //MARK: - Keyboard Observers
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        notificationCenter.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     //MARK: - Unsubscribe From Observers
@@ -140,6 +140,27 @@ final class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
+    //MARK: - Keyboard Display
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keybordSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            scrollView.contentInset.bottom = keybordSize.height
+            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keybordSize.height, right: 0)
+        }
+    }
+
+    //MARK: - Hiding the Keyboard
+    @objc private func keyboardWillHide() {
+        scrollView.contentOffset = .zero
+        scrollView.verticalScrollIndicatorInsets = .zero
+    }
+
+    //MARK: - IsValidPassword
+    private func isValidPassword(_ password: String) -> Bool {
+        let passwordRegEx = "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,64}"
+        let passwordPred = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
+        return passwordPred.evaluate(with: password)
+    }
+
     //MARK: - IsValidEmail
     private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -147,9 +168,8 @@ final class LogInViewController: UIViewController {
         return emailPred.evaluate(with: email)
     }
 
-    //MARK: - Action Login Button Show ProfileViewController
     @objc private func actionloginButton () {
-        if emailTextFild.text == "" || emailTextFild.text == "" {
+        if emailTextFild.text == "" && passwordTextFild.text == "" {
             let animation = CABasicAnimation(keyPath: "position")
             animation.duration = 0.07
             animation.repeatCount = 4
@@ -161,19 +181,38 @@ final class LogInViewController: UIViewController {
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
             passwordTextFild.attributedPlaceholder = NSAttributedString(string: passwordTextFild.placeholder ?? "",
                                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-
         }  else {
             stackView.layer.removeAnimation(forKey: "position")
 
         }
 
+        if emailTextFild.text != "" && passwordTextFild.text == "" {
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: stackView.center.x - 10, y: stackView.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: stackView.center.x + 10, y: stackView.center.y))
+            stackView.layer.add(animation, forKey: "position")
+            passwordTextFild.attributedPlaceholder = NSAttributedString(string: passwordTextFild.placeholder ?? "",
+                                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+        }
+
         // Проверка на валидацию email
         if isValidEmail(emailTextFild.text!) == false && emailTextFild.text != ""  {
             emailTextFild.text = ""
-            emailTextFild.attributedPlaceholder = NSAttributedString(string: "Email is incorrect",
+            emailTextFild.attributedPlaceholder = NSAttributedString(string: " Не корректно введен Email",
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
         }
-        // Проверка на определенное количество вводимых символов пароля
+
+        // Проверка на введеный email
+        if isValidPassword(passwordTextFild.text!) && emailTextFild.text == ""  {
+            emailTextFild.text = ""
+            emailTextFild.attributedPlaceholder = NSAttributedString(string: " Не введен Email",
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+        }
+
+        // Проверка на количество введенных символов
         if passwordTextFild.text!.count < 8 && passwordTextFild.text != "" {
             alertLabel.text = alertLabel.text
             alertLabel.isHidden = false
@@ -182,32 +221,23 @@ final class LogInViewController: UIViewController {
             alertLabel.isHidden = true
         }
 
-        if emailTextFild.text == login && passwordTextFild.text == password {
+        if isValidEmail(emailTextFild.text!) && isValidPassword(passwordTextFild.text!) {
             let profileVC = ProfileViewController()
             navigationController?.pushViewController(profileVC, animated: true)
 
-        } else if emailTextFild.text != "" && passwordTextFild.text != ""  {
-            let alert = UIAlertController(title: "Неверные данные", message: "Вы ввели неверный логин или пароль, попробуйте снова", preferredStyle: .alert)
+        } else if emailTextFild.text != "" && passwordTextFild.text != "" {
+            let alert = UIAlertController(title: nil, message: "Вы ввели не верный логин или пароль", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Попробовать еще раз", style: .default)
             alert.addAction(okAction)
             present(alert, animated: true)
         }
-    }
 
-    //MARK: - Keyboard Display
-    @objc private func keyboardShow(notification: NSNotification) {
-
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let size = view.frame.height - keyboardSize.height
-            scrollView.contentOffset = CGPoint(x: 0, y: loginButton.frame.origin.y - size + 100)
-            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        // Проверка на валидацию password
+        if isValidPassword(passwordTextFild.text!) == false && passwordTextFild.text != ""  {
+            passwordTextFild.text = ""
+            passwordTextFild.attributedPlaceholder = NSAttributedString(string: " Не корректно введен Password",
+                                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
         }
-    }
-
-    //MARK: - Hiding the Keyboard
-    @objc private func keyboardHide() {
-        scrollView.contentOffset = .zero
-        scrollView.verticalScrollIndicatorInsets = .zero
     }
 
     //MARK: - SetupLayout
@@ -246,15 +276,14 @@ final class LogInViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 100),
 
-            loginButton.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.bottomAnchor, constant: 16),
+            loginButton.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.bottomAnchor, constant: 20),
             loginButton.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             loginButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
-            alertLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            alertLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
-            alertLabel.bottomAnchor.constraint(equalTo: loginButton.topAnchor)
+            alertLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 3),
+            alertLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }
 }
