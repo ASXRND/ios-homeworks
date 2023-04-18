@@ -28,7 +28,7 @@ final class ProfileHeaderView: UIView {
     //MARK: - Add Title Label
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Спасибо за знания!"
+        label.text = "Профиль!"
         label.textColor = UIColor(named: "labelColor")
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ final class ProfileHeaderView: UIView {
     //MARK: - Add Status Label
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "С вами было увлекательно!"
+        label.text = "Тут будет статус"
         label.textColor = UIColor(named: "statusLabelColor")
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false

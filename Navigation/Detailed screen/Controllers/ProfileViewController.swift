@@ -11,7 +11,6 @@ final class ProfileViewController: UIViewController {
     
     private var modelStar: [[Any]] = [["Photos"], Modelstar.starArray()]
 
-
     //MARK: - Add Table View
     private lazy var myTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
