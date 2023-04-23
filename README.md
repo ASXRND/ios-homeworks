@@ -17,11 +17,11 @@ An iOS application/project, that contains various classes/tutorials for effects,
 -------------------     ----------------------------
 ## Animations
 - - -
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="150" height="270">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="150" height="270">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="150" height="270"> 
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/4.gif" width="150" height="300">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/5.gif" width="150" height="300">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="150" height="280">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="150" height="280">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="150" height="280"> 
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/4.gif" width="150" height="280">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/5.gif" width="150" height="280">
 
  <br>
  
