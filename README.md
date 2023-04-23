@@ -17,13 +17,23 @@ An iOS application/project, that contains various classes/tutorials for effects,
 -------------------     ----------------------------
 ## Animations
 
-<img src="https://github.com/ASXRND/Animations/blob/master/GifProject/project.gif" width="300"> 
+<img src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="300"> 
+<img src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="300"> 
+<img src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="300"> 
+<img src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/4.gif" width="300"> 
+<img src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/5.gif" width="300"> 
  
 ## Languages / Frameworks Used
 - Swift 5
 - UIKit
-- CoreGraphics
-- CoreAnimation
+- UITableView
+- UICollectionView
+- ValidEmail
+- UITapGestureRecognizer
+- Animate
+- CAGradientLayer
+- CABasicAnimation
+- Headers
 
 ## Spread the word!
 Liked the project? Just give it a star ⭐️ and spread the word!
