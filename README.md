@@ -17,9 +17,9 @@ An iOS application/project, that contains various classes/tutorials for effects,
 -------------------     ----------------------------
 ## Animations
 
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="260">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="260">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="260">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="280">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="280">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="280">
 
 
 
