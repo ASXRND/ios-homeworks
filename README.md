@@ -17,6 +17,7 @@ An iOS application/project, that contains various classes/tutorials for effects,
 -------------------     ----------------------------
 ## Animations
 - - -
+
 <img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="150" height="280">
 <img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="150" height="280">
 <img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="150" height="280"> 
@@ -26,7 +27,30 @@ An iOS application/project, that contains various classes/tutorials for effects,
  <br>
  
 
-    
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 ## Languages / Frameworks Used
 - Swift 5
 - UIKit
