@@ -15,12 +15,12 @@ An iOS application/project, that contains various classes/tutorials for effects,
 ## Graduation project netology.
 
 
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="200" height="400">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="200" height="400">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="200" height="400"> 
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/4.gif" width="200" height="400">
-<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/5.gif" width="200" height="400">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/1.gif" width="160" height="320">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/2.gif" width="160" height="320">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/3.gif" width="160" height="320"> 
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/4.gif" width="160" height="320">
+<img align="left" src="https://github.com/ASXRND/ASXRND/blob/test/GifProject/NavigationGif/5.gif" width="160" height="320">
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 ## Languages / Frameworks Used
